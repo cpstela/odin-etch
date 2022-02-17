@@ -1,5 +1,7 @@
 body {
     background-color: black;
+    display: flex;
+    justify-content: space-around;
 }
 
 #container {
@@ -10,6 +12,9 @@ body {
 #clear-button {
     margin-top: 15px;
     padding: 10px;
+    background-color: yellow;
+    font-weight: bold;
+
 }
 
 .center {
