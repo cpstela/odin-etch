@@ -4,6 +4,27 @@ window.onload = function(){
   drawSquares(16);
 };
 
+//Button
+
+const clearButton = document.querySelector('#clear-button');
+
+clearButton.addEventListener('click', ()=> {
+  let newSize = askNumber();
+  container.innerHTML = '';
+  drawSquares(newSize);
+
+});
+
+//Functions
+
+function askNumber() {
+  let number = window.prompt('Enter a new size (must be under 100)');
+    if( isNaN(number) || number % 1 !==0 || number <= 0 || number > 100 ){ //Validation
+      number = window.prompt('Please, enter a number from 1 to 100');
+    }
+  return number;
+}
+
 function drawSquares (numSquares){
   for (j = 0; j < numSquares; j++ ) {
     for (i = 0; i < numSquares; i++ ){
@@ -24,15 +45,6 @@ function drawSquares (numSquares){
     });
   });
 }
-
-const clearButton = document.querySelector('#clear-button');
-
-clearButton.addEventListener('click', ()=> {
-  let newSize = window.prompt('Enter a new size (must be under 100)', 16);
-  container.innerHTML = '';
-  drawSquares(newSize);
-
-});
 
 function getRandomColor() {
   let letters = '0123456789ABCDEF';
