@@ -1,23 +1,44 @@
 const container = document.querySelector('#container');
 
-for (j = 0; j < 16; j++ ) {
-    for (i = 0; i < 16; i++ ){
+window.onload = function(){
+  drawSquares(16);
+};
+
+function drawSquares (numSquares){
+  for (j = 0; j < numSquares; j++ ) {
+    for (i = 0; i < numSquares; i++ ){
         const square = document.createElement('div');
-        square.classList.add('white-square');
+        square.style.height = 500/numSquares + 'px';
+        square.style.width = 500/numSquares + 'px';
+        square.style.display = 'inline-block';
+        square.style.backgroundColor = 'white';
         container.appendChild(square);
+        square.classList.add('square'); 
     }
+  }
+  const squares = document.querySelectorAll('.square');
+
+  squares.forEach((square) => {
+    square.addEventListener('mouseover', () => {
+      square.style.backgroundColor = getRandomColor();
+    });
+  });
 }
 
-const squares = document.querySelectorAll('.white-square');
+const clearButton = document.querySelector('#clear-button');
 
-squares.forEach((square) => {
-  square.addEventListener('mouseover', () => {
-    square.classList.remove('white-square');
-    square.classList.add('black-square');
-  });
+clearButton.addEventListener('click', ()=> {
+  let newSize = window.prompt('Enter a new size (must be under 100)', 16);
+  container.innerHTML = '';
+  drawSquares(newSize);
+
 });
 
-
-
-//const blackSquares = Array.from(document.querySelectorAll('.black-square'));
-  
+function getRandomColor() {
+  let letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
